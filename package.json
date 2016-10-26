@@ -1,0 +1,14 @@
+{
+  "name": "process-as-promised",
+  "version": "1.0.0",
+  "description": "This is a small lib for (mostly) promisified process ipc communication",
+  "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "cd ./test && node test_master.js"
+  },
+  "author": "Gus Caplan <me@gus.host>",
+  "license": "MIT"
+}
