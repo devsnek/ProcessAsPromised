@@ -1,7 +1,10 @@
 # Process as Promised #
 
-##### A small lib for (mostly) promisified native process IPC communication #####
+[![npm](https://img.shields.io/npm/v/process-as-promised.svg?maxAge=3600)](https://www.npmjs.com/package/process-as-promised)
+[![npm](https://img.shields.io/npm/dt/process-as-promised.svg?maxAge=3600)](https://www.npmjs.com/package/process-as-promised)
+[![David](https://david-dm.org/guscaplan/ProcessAsPromised.svg)](https://david-dm.org/guscaplan/ProcessAsPromised)
 
+[![NPM](https://nodei.co/npm/process-as-promised.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/process-as-promised/)
 
 ```js
 /*
