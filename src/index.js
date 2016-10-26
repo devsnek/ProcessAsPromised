@@ -6,7 +6,7 @@ const uuid = () => {
 }
 
 /**
- * This is a small lib for (mostly) promisified process ipc communication
+ * This is a small lib for (mostly) promisified native process IPC communication
  * @example
  * // parent
  * p.send('info').then(console.log) // 'mydata'
