@@ -10,5 +10,13 @@
     "test": "cd ./test && node test_master.js"
   },
   "author": "Gus Caplan <me@gus.host>",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GusCaplan/ProcessAsPromised.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GusCaplan/ProcessAsPromised/issues"
+  },
+  "homepage": "https://github.com/GusCaplan/ProcessAsPromised#readme"
 }
