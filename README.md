@@ -31,7 +31,7 @@ p.on('info', (data, callback) => {
 ```
 
 #### Reasons to use: ####
-1. No dependancies!
+1. No dependencies!
 2. Oh-so useful
 3. _insanely_ performant
 4. Can be used with async/await
