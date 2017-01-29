@@ -12,8 +12,8 @@ const uuid = () => {
  * p.send('info').then(console.log) // 'mydata'
  *
  * // child
- * p.on('info', (data, callback) => {
- *   callback('mydata');
+ * p.on('info', (data, reply) => {
+ *   reply('mydata');
  * });
  */
 class ProcessCallAndResponse extends EventEmitter {
@@ -25,9 +25,17 @@ class ProcessCallAndResponse extends EventEmitter {
     this.process = p || process;
     this.process.on('message', message => {
       if (!('__ID' in message)) return;
-      const tracker = message.__ID;
-      const callback = data => this.process.send({__ID: tracker, data});
-      this.emit(message.event, message.data, callback);
+      new Promise((resolve, reject) => {
+        this.emit(message.event, message.data, resolve.bind(this));
+        if (message.timeout) setTimeout(
+          () => reject(new Error('PROCESS_RESOLVE_TIMEOUT')),
+          message.timeout
+        );
+      }).then((data) => {
+        this.process.send({ __ID: message.__ID, data });
+      }).catch((error) => {
+        this.process.send({ __ID: message.__ID, error: error.message });
+      })
     });
   }
 
@@ -37,14 +45,15 @@ class ProcessCallAndResponse extends EventEmitter {
    * @param {*} data The data to send with the event
    * @returns {Promise<*>}
    */
-  send (event, data) {
+  send (event, data, timeout) {
     return new Promise((resolve, reject) => {
       const tracker = uuid();
-      this.process.send({__ID: tracker, event, data});
+      this.process.send({ __ID: tracker, event, data, timeout });
       const handler = message => {
         if (message.__ID !== tracker) return;
         this.process.removeListener('message', handler);
-        resolve(message.data);
+        if (message.error) reject(message.error);
+        else resolve(message.data);
       }
       this.process.on('message', handler);
     });
